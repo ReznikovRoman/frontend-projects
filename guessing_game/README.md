@@ -1,8 +1,9 @@
 # Guessing Game
 
-##Technologies:
+## Technologies:
 - HTML
 - CSS
 - JavaScript
 
-##Demo:
+## Demo:
+![Dark theme](https://github.com/[ReznikovRoman]/[frontend-projects]/blob/master/dark_theme.jpg?raw=true)
