@@ -6,4 +6,4 @@
 - JavaScript
 
 ## Demo:
-![Dark theme](demo_pictures/dark_theme.png?raw=true "Guessing Game")
+![Dark theme](demo_pictures/dark_theme_new.png?raw=true "Guessing Game")
