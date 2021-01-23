@@ -21,11 +21,26 @@ function setLightTheme() {
     document.querySelector('.guess').style.color = '#222';
     document.querySelector('.guess').style.backgroundColor = '#eee';
     document.querySelector('.guess').style.borderColor = '#222';
-    document.querySelector('.btn').style.color = '#eee';
-    document.querySelector('.btn').style.backgroundColor = '#222';
-    document.querySelector('.check').style.color = '#eee';
-    document.querySelector('.check').style.backgroundColor = '#222';
-    document.querySelector('.btn:hover').style.backgroundColor = '#ccc';
+
+    document.querySelectorAll('.btn').forEach(function (btn) {
+        btn.classList.remove('dark_btn');
+        btn.classList.remove('dark_btn_hover');
+        btn.classList.add('light_btn');
+
+        btn.addEventListener(
+            'mouseover',
+            function () {
+                btn.classList.remove('dark_btn_hover');
+                this.classList.add('light_btn_hover')
+            }
+        )
+        btn.addEventListener(
+            'mouseleave',
+            function () {
+                this.classList.remove('light_btn_hover')
+            }
+        )
+    });
 }
 
 function setDarkTheme() {
@@ -38,14 +53,34 @@ function setDarkTheme() {
     document.querySelector('.guess').style.color = '#eee';
     document.querySelector('.guess').style.borderColor = '#eee';
     document.querySelector('.guess').style.backgroundColor = '#222';
-    document.querySelector('.check').style.color = '#222';
-    document.querySelector('.check').style.backgroundColor = '#eee';
-    document.querySelector('.again').style.color = '#222';
-    document.querySelector('.again').style.backgroundColor = '#eee';
-    document.querySelector('.btn:hover').style.backgroundColor = '#ccc';
-    document.querySelector('.btn').style.color = '#222';
-    document.querySelector('.btn').style.backgroundColor = '#eee';
-    document.querySelector('.btn:hover').style.backgroundColor = '#ccc';
+
+    document.querySelectorAll('.btn').forEach(function (btn) {
+        btn.classList.remove('light_btn');
+        btn.classList.remove('light_btn_hover');
+        btn.classList.add('dark_btn');
+
+        btn.addEventListener(
+            'mouseover',
+            function () {
+                btn.classList.remove('light_btn_hover');
+                this.classList.add('dark_btn_hover')
+            }
+        )
+        btn.addEventListener(
+            'mouseleave',
+            function () {
+                this.classList.remove('dark_btn_hover')
+            }
+        )
+    });
+
+
+}
+
+
+function setCurrentTheme(themeName) {
+    if (themeName === 'dark') setDarkTheme();
+    else if (themeName === 'light') setLightTheme();
 }
 
 function resetGame() {
@@ -53,6 +88,8 @@ function resetGame() {
 
     score = 20;
     document.querySelector('.score').textContent = String(score);
+
+    setCurrentTheme(currentTheme);
 
     displayMessage('Start guessing...');
     document.querySelector('.guess').value = '';

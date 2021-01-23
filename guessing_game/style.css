@@ -117,8 +117,22 @@ h1 {
   cursor: pointer;
 }
 
-.btn:hover {
+.btn:hover, .dark_btn_hover {
   background-color: #ccc;
+}
+
+.dark_btn {
+  color: #222;
+  background-color: #eee;
+}
+
+.light_btn {
+  color: #eee;
+  background-color: #222;
+}
+
+.light_btn_hover {
+  background-color: #404040 !important;
 }
 
 .message {
