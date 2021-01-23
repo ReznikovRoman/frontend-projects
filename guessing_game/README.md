@@ -1,8 +1,9 @@
 # Guessing Game
 
-##Technologies:
+## Technologies:
 - HTML
 - CSS
 - JavaScript
 
-##Demo:
+## Demo:
+![Dark theme](demo_pictures/dark_theme.png?raw=true "Guessing Game")
