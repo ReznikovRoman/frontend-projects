@@ -1,4 +1,5 @@
 # Dice Game
+Dice Game (Pig Game) - project from the Udemy course but with the reformatted code and new feature (rules of the game)
 
 ## Technologies:
 - HTML
