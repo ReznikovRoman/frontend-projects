@@ -6,25 +6,49 @@ let score = 20;
 let highscore = 0;
 let currentTheme = 'dark';
 
+const body = document.querySelector('body');
+const main = document.querySelector('main');
+
+const scoreHTMl = document.querySelector('.score');
+const highscoreHTMl = document.querySelector('.highscore');
+const displayedNumber = document.querySelector('.number');
+const guess = document.querySelector('.guess');
+
+const btnAgain = document.querySelector('.again');
+const btnCheck = document.querySelector('.check');
+const btnTheme = document.querySelector('.theme_icon');
+
+
 function displayMessage(message) {
     document.querySelector('.message').textContent = message;
 }
 
+
+function switchTheme() {
+    if (currentTheme === 'dark') {
+        currentTheme = 'light';
+        setLightTheme();
+    } else {
+        currentTheme = 'dark';
+        setDarkTheme();
+    }
+}
+
+
 function setLightTheme() {
-    document.querySelector('body').style.color = '#222';
-    document.querySelector('body').style.backgroundColor = '#88afff5c';
-    document.querySelector('main').style.color = '#222';
-    document.querySelector('.number').style.color = '#eee';
-    document.querySelector('.number').style.border = '#222';
-    document.querySelector('.number').style.backgroundColor = '#222';
-    document.querySelector('.theme_icon').style.color = '#222';
-    document.querySelector('.guess').style.color = '#222';
-    document.querySelector('.guess').style.backgroundColor = '#eee';
-    document.querySelector('.guess').style.borderColor = '#222';
+    body.style.color = '#222';
+    body.style.backgroundColor = '#88afff5c';
+    main.style.color = '#222';
+    displayedNumber.style.color = '#eee';
+    displayedNumber.style.border = '#222';
+    displayedNumber.style.backgroundColor = '#222';
+    btnTheme.style.color = '#222';
+    guess.style.color = '#222';
+    guess.style.backgroundColor = '#eee';
+    guess.style.borderColor = '#222';
 
     document.querySelectorAll('.btn').forEach(function (btn) {
-        btn.classList.remove('dark_btn');
-        btn.classList.remove('dark_btn_hover');
+        btn.classList.remove('dark_btn', 'dark_btn_hover');
         btn.classList.add('light_btn');
 
         btn.addEventListener(
@@ -43,20 +67,20 @@ function setLightTheme() {
     });
 }
 
+
 function setDarkTheme() {
-    document.querySelector('body').style.color = '#eeeeee';
-    document.querySelector('body').style.backgroundColor = '#222';
-    document.querySelector('main').style.color = '#eee';
-    document.querySelector('.number').style.color = '#222';
-    document.querySelector('.number').style.backgroundColor = '#eee';
-    document.querySelector('.theme_icon').style.color = '#ffff00';
-    document.querySelector('.guess').style.color = '#eee';
-    document.querySelector('.guess').style.borderColor = '#eee';
-    document.querySelector('.guess').style.backgroundColor = '#222';
+    body.style.color = '#eeeeee';
+    body.style.backgroundColor = '#222';
+    main.style.color = '#eee';
+    displayedNumber.style.color = '#222';
+    displayedNumber.style.backgroundColor = '#eee';
+    btnTheme.style.color = '#ffff00';
+    guess.style.color = '#eee';
+    guess.style.borderColor = '#eee';
+    guess.style.backgroundColor = '#222';
 
     document.querySelectorAll('.btn').forEach(function (btn) {
-        btn.classList.remove('light_btn');
-        btn.classList.remove('light_btn_hover');
+        btn.classList.remove('light_btn', 'light_btn_hover');
         btn.classList.add('dark_btn');
 
         btn.addEventListener(
@@ -83,27 +107,28 @@ function setCurrentTheme(themeName) {
     else if (themeName === 'light') setLightTheme();
 }
 
+
 function resetGame() {
     number = Math.trunc(Math.random() * 20) + 1;
 
     score = 20;
-    document.querySelector('.score').textContent = String(score);
+    scoreHTMl.textContent = String(score);
 
     setCurrentTheme(currentTheme);
 
     displayMessage('Start guessing...');
-    document.querySelector('.guess').value = '';
-    document.querySelector('.number').textContent = '?';
-    document.querySelector('.number').style.width = '15rem';
+    guess.value = '';
+    displayedNumber.textContent = '?';
+    displayedNumber.style.width = '15rem';
 }
 
 
-document.querySelector('.guess').addEventListener(
+guess.addEventListener(
     'keydown',
     function (event) {
         if (event.key === 'Enter') {
             event.preventDefault();
-            document.querySelector('.check').click();
+            btnCheck.click();
         }
         else if (event.key === 'Escape') {
             event.preventDefault();
@@ -112,11 +137,10 @@ document.querySelector('.guess').addEventListener(
     }
 )
 
-
-document.querySelector('.check').addEventListener(
+btnCheck.addEventListener(
     'click',
     function () {
-        const userGuess = Number(document.querySelector('.guess').value);
+        const userGuess = Number(guess.value);
 
         // Player didn't enter the guess
         if (!userGuess) displayMessage('⛔ No number!');
@@ -130,12 +154,12 @@ document.querySelector('.check').addEventListener(
 
             if (score > highscore) {
                 highscore = score;
-                document.querySelector('.highscore').textContent = highscore;
+                highscoreHTMl.textContent = highscore;
             }
 
-            document.querySelector('.number').textContent = String(number);
-            document.querySelector('body').style.backgroundColor = '#60b347';
-            document.querySelector('.number').style.width = '30rem';
+            displayedNumber.textContent = String(number);
+            displayedNumber.style.width = '30rem';
+            body.style.backgroundColor = '#60b347';
         }
 
         // If user guess is wrong
@@ -143,34 +167,18 @@ document.querySelector('.check').addEventListener(
             if (score > 1) {
                 displayMessage(userGuess > number ? '📈 Too high!' : '📉 Too low!');
                 score -= 1;
-                document.querySelector('.score').textContent = score;
+                scoreHTMl.textContent = score;
             } else {
-                document.querySelector('.score').textContent = '0';
+                scoreHTMl.textContent = '0';
                 displayMessage('😪 You lost!');
             }
         }
     }
 );
 
+btnAgain.addEventListener('click', resetGame);
 
-document.querySelector('.again').addEventListener(
-    'click',
-    resetGame,
-)
-
-
-document.querySelector('.theme_icon').addEventListener(
-    'click',
-    function () {
-        if (currentTheme === 'dark') {
-            currentTheme = 'light';
-            setLightTheme();
-        } else {
-            currentTheme = 'dark';
-            setDarkTheme();
-        }
-    }
-)
+btnTheme.addEventListener('click', switchTheme);
 
 
 
