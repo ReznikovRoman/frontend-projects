@@ -6,6 +6,10 @@
 - JavaScript
 
 ## Demo:
+### Video-demo
+https://youtu.be/9uj4BP0puL8
+
+### Images
 <p align='center'>1 - Main Screen (Dark theme)</p>
 <img src='demo_pictures/dark_theme_new.png' alt='Guessing Game | Dark theme'>
 
